@@ -1,28 +1,25 @@
 /*
  * Led.c
  *
- * Created: 9/29/2021 7:09:05 PM
- *  Author: Dell
+ * Created: 9/12/2021 10:35:46 PM
+ *  Author: Abdelaziz Moustafa
  */ 
- 
- #include "DIO.h"
- #include "Led.h"
- #include "Std_Types.h"
- #include "Macros.h"
- #include "ATmega32_Configuration.h"
- 
- // functions implementation
- void Led_Init( volatile uint8 * Led_reg , LedPinEnum_t LedNumber){
- DioChannelDirectionSet(Led_reg,LedNumber,DIO_OUTPUT);
- }
- //----------------------------------------------------------------
- void Led_StateSet(volatile uint8 * Led_reg , LedPinEnum_t LedNumber , LedStateEnum_t State){
-		if(State == LED_TOGGLE){
-		DioChannelToggle(Led_reg,LedNumber);
-		}
-		else{
-		DioChannelWrite(Led_reg,LedNumber,State);
-		}
- }
- //------------------------------------------------------------------
 
+#include "Led.h"
+#include "Dio.h"
+
+void Led_Init(volatile uint8 *Led_reg, LedEnum_t Led_no)
+{
+	Dio_ChannelDirectionSet(Led_reg, Led_no, DIO_OUTPUT);
+}
+void Led_StateSet(volatile uint8 *Led_reg, LedEnum_t Led_no, LedStateEnum_t state)
+{
+	if (state == LED_TOGGLE)
+	{
+		Dio_ChannelToggle(Led_reg, Led_no);
+	}
+	else
+	{
+		Dio_ChannelWrite(Led_reg, Led_no, state);
+	}
+}

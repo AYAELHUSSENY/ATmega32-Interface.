@@ -1,33 +1,41 @@
 /*
- * SPI.c
+ * Timers.c
  *
- * Created: 10/30/2021 3:29:17 PM
+ * Created: 10/15/2021 1:52:55 PM
  * Author : Dell
  */ 
+ #include <avr/interrupt.h>
+#include "GPT.h"
+#include "External_Interrupts.h"
+#include "Led.h"
+uint16 gu16TimerCounter; // it will be initialized already by 0 in the bss section by the start up code 
 
-#include <avr/io.h>
-#include "SPI.h"
-#include "LCD.h"
-#include <util/delay.h>
-
-int main(void)
+ISR(TIMER0_COMP_vect)
 {
-   SPI_Init(&gStrSpi_Configuration);
-   LCD_Init();
-   uint8 u8LocalData = 0U;
-    while (1) 
-    {
-		
-		LCD_RowCol_Select(0,5);
-		LCD_StringDisplay("Master Node");
-		LCD_RowCol_Select(1,5);
-		LCD_IntegerDisplay(u8LocalData);
-		SPI_MasterTx(u8LocalData);
-		
-		_delay_ms(1000);
-		u8LocalData = (u8LocalData+1)%10;
-		LCD_Clear();
-		
-    }
+	gu16TimerCounter++;
+}
+int main(void)
+{		
+		Gpt_Init(GPT0,GPT_MODE_CTC,GPT_PRESCALE_256,GPT_INTERRUPT_ENABLE,11U);
+		Global_Interrupt_State_SET(GLOBALE_INTERRUPT_ENABLE);
+		Led_Init(LED0_1_DIR_REG,LED0);
+/* 
+			F_cpu = 16*10^6
+			prescale = 8
+			F_timer = 2*10^6
+			Tick_Time = 1/F_timer
+			Tick_Time = 1/2*10^6 = 0.5 micro second
+			overflow_time = 0.5 micro second * 255 = 1.275 * 10^-4 sec = 0.1275 sec
+			1 ms --> 10 Overflow
+																								*/
+			while (1)
+			{
+				if(gu16TimerCounter == 5000)
+				{
+				Led_StateSet(LED0_1_OUT_REG,LED0,LED_TOGGLE);
+				gu16TimerCounter = 0U;
+
+				}
+			}
 }
 
