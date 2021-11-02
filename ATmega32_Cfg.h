@@ -1,9 +1,3 @@
-/*
- * ATmega32_Cfg.h
- *
- * Created: 9/12/2021 9:35:26 PM
- *  Author: Abdelaziz Moustafa
- */ 
 
 
 #ifndef ATMEGA32_CFG_H_
