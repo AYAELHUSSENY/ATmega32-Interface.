@@ -1,9 +1,4 @@
-/*
- * LCD.h
- *
- * Created: 9/23/2021 10:29:33 PM
- *  Author: Abdelaziz Moustafa
- */ 
+
 
 
 #ifndef LCD_H_
