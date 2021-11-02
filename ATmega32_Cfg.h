@@ -36,11 +36,49 @@
 #define AVR_STATUS_REG			((volatile uint8*)0x5FU)  /* SREG */
 
 /* ADC Registers    */
-#define ADC_MUX_SELECTION_REG   ((volatile uint8*)0x27U)	/*ADMUX*/
-#define ADC_CTRL_AND_STATUS_REG ((volatile uint8*)0x26U)	/*ADCSRA*/
-#define ADC_DATA_HIGH_REG		((volatile uint8*)0x25U)	/*ADCH*/
-#define ADC_DATA_LOW_REG		((volatile uint8*)0x24U)	/*ADCL*/
+#define ADC_MUX_REG             ((volatile uint8*)0x27U)  /* ADMUX */
+#define ADC_CTRL_STATUS_A_REG   ((volatile uint8*)0x26U)  /* ADCSRA */
+#define ADC_DATA_HIGH_REG       ((volatile uint8*)0x25U)  /* ADCH */
+#define ADC_DATA_LOW_REG        ((volatile uint8*)0x24U)  /* ADCL */
 
 /* Special Function Registers */ 
 #define SPECIAL_FUNC_IO_REG     ((volatile uint8*)0x50U)  /* SFIOR */
+
+/* Timer0 Registers */
+#define TIMER0_CTRL_REG         ((volatile uint8 *)0x53U)
+#define TIMER0_COUNTER_REG      ((volatile uint8 *)0x52U)
+#define TIMER0_CMP_REG          ((volatile uint8 *)0x5CU)
+
+/* Timer1 Registers */
+#define TIMER1_CTRL_A_REG       ((volatile uint8 *)0x4FU)
+#define TIMER1_CTRL_B_REG       ((volatile uint8 *)0x4EU)
+#define TIMER1_COUNTER_LOW_REG  ((volatile uint8 *)0x4CU)
+#define TIMER1_COUNTER_HIGH_REG ((volatile uint8 *)0x4DU)
+#define TIMER1_CMP_A_LOW_REG    ((volatile uint8 *)0x4AU)
+#define TIMER1_CMP_A_HIGH_REG   ((volatile uint8 *)0x4BU)
+#define TIMER1_CMP_B_LOW_REG    ((volatile uint8 *)0x48U)
+#define TIMER1_CMP_B_HIGH_REG   ((volatile uint8 *)0x49U)
+#define TIMER1_INP_CAP_LOW_REG  ((volatile uint8 *)0x46U)
+#define TIMER1_INP_CAP_HIGH_REG ((volatile uint8 *)0x47U)
+
+#define TIMER_INT_MASK_REG     ((volatile uint8 *)0x59U)
+#define TIMER_INT_FLAG_REG     ((volatile uint8 *)0x58U)
+
+/* Watchdog timer Register */
+#define WDG_CTRL_REG           ((volatile uint8 *)0x41U)
+
+/* UART Registers */
+#define UART_DATA_REG          ((volatile uint8 *)0x2CU)  /* UDR */
+#define UART_CTRL_STATUS_A_REG ((volatile uint8 *)0x2BU)  /* UCSRA */
+#define UART_CTRL_STATUS_B_REG ((volatile uint8 *)0x2AU)  /* UCSRB */
+#define UART_CTRL_STATUS_C_REG ((volatile uint8 *)0x40U)  /* UCSRC */
+#define UART_BAUDRATE_LOW_REG  ((volatile uint8 *)0x29U)  /* UBBRL */
+#define UART_BAUDRATE_HIGH_REG ((volatile uint8 *)0x40U)  /* UBBRH */
+
+/* SPI Registers */
+#define SPI_CTRL_REG           ((volatile uint8 *)0x2DU)
+#define SPI_STATUS_REG         ((volatile uint8 *)0x2EU)
+#define SPI_DATA_REG           ((volatile uint8 *)0x2FU)
+
+
 #endif /* ATMEGA32_CFG_H_ */

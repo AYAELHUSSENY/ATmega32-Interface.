@@ -1,28 +1,33 @@
 /*
- * ADC_Home.c
+ * SPI.c
  *
- * Created: 10/14/2021 7:04:22 PM
+ * Created: 10/30/2021 3:29:17 PM
  * Author : Dell
  */ 
 
 #include <avr/io.h>
-#include "ADC.h"
+#include "SPI.h"
 #include "LCD.h"
-#include "Std_Types.h"
 #include <util/delay.h>
 
 int main(void)
 {
-	ADC_Init(&ADC_Config);
-	LCD_Init();
-	uint16 ADCReading = 0U;
-	while (1)
-	{
-		ADCReading = ADC_Read(ADC_Channel1);
-		LCD_IntegerDisplay(ADCReading);
-		_delay_ms(500);
+   SPI_Init(&gStrSpi_Configuration);
+   LCD_Init();
+   uint8 u8LocalData = 0U;
+    while (1) 
+    {
+		
+		LCD_RowCol_Select(0,5);
+		LCD_StringDisplay("Master Node");
+		LCD_RowCol_Select(1,5);
+		LCD_IntegerDisplay(u8LocalData);
+		SPI_MasterTx(u8LocalData);
+		
+		_delay_ms(1000);
+		u8LocalData = (u8LocalData+1)%10;
 		LCD_Clear();
-
-	}
+		
+    }
 }
 
